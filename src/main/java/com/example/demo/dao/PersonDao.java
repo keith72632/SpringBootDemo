@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.example.demo.model.Person;
 
+//Data Access Object. Encapsulates the details of the persistence layer
 public interface PersonDao {
     int insertPerson(UUID id, Person person);
 
