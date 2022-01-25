@@ -1,0 +1,23 @@
+Project Structure
+
+1) Data Access Object(s)
+    This layer accesses data storage directly. Created an interface as a template for these classes is considered good
+coding practice. Implement methods to read, write, edit and delete database entries. It's important to designate these
+classes as repositories, in other words storage for data, by using the annotation @Repository("RepoName"). These classes
+can later by referenced with the RepoName in the Service layer with the annotation @Qualifier("RepoName").
+
+2) Service Layer
+    This layer acts as a middleman between the API REST requests(Controller) and the Data Access layer. Must inherit Data
+Access Object interface or pass to constructor. Use annotation @Qualifier("RepoName") to determine which Repo to use.
+
+3) Controller Layer (API)
+    This layer handles all of the HTTP requests. Class should either inherit or take Service Layer class in constructor,
+and must use these Service layer methods to interact with the database. Use @RequestMapping annotation to set the endpoint,
+and the @RestController to designate class as a controller. Some other usefull annotations for this layer include:
+    a) @PathVariable("variableName"). Use this before method argument to instruct to compiler to get argument from url.
+    b) @RequestBody. Instruct compiler to get method argument from HTTP request body
+    c) @Valid
+    d) @NonNull
+
+Running in Production
+    To run in production, use the jar file in the target directory. Use the command {java -jar file.jar}. 

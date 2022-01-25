@@ -3,10 +3,13 @@ package com.example.demo.api;
 import com.example.demo.model.Person;
 import com.example.demo.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
+import javax.validation.Valid;
 
 @RequestMapping("api/v1/person")
 @RestController
@@ -21,7 +24,7 @@ public class PersonController {
     }
 
     @PostMapping
-    public void addPerson(@RequestBody Person person)
+    public void addPerson(@Valid @RequestBody @NonNull Person person)
     {
         personService.addPerson(person);
         System.out.println(person.getName() + " added with id " + person.getId());
@@ -45,7 +48,7 @@ public class PersonController {
     }
 
     @PutMapping(path="{id}")
-    public void updatePerson(@PathVariable("id") UUID id, @RequestBody Person personToUpdate){
+    public void updatePerson(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody Person personToUpdate){
         personService.updatePerson(id, personToUpdate);
     }
 }
